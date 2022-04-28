@@ -1121,6 +1121,10 @@ void TechnologyParameter::init(double technology, bool is_tag) {
   }
 
   fp = fopen(in_file_lo.c_str(), "r");
+  if (!fp) {
+    cerr << "\n'" << in_file_lo << "' cannot be found.\n";
+    exit(1);
+  }
   dram_cell_I_on = 0;
   dram_cell_Vdd = 0;
   dram_cell_C = 0;
@@ -1319,6 +1323,10 @@ void TechnologyParameter::init(double technology, bool is_tag) {
       (alpha * sram_cell_lo.Vdd + (1 - alpha) * sram_cell_hi.Vdd) * 0.65;
 
   fp = fopen(in_file_hi.c_str(), "r");
+  if (!fp) {
+    cerr << "\n'" << in_file_hi << "' cannot be found.\n";
+    exit(1);
+  }
 
   while (fscanf(fp, "%[^\n]\n", line) != EOF) {
     if (!strncmp("-sense_delay", line, strlen("-sense_delay"))) {
